@@ -6,9 +6,9 @@ from sklearn.ensemble import RandomForestRegressor
 class Strategy:
     def __init__(self):
         self.models = {}
-        self.name= "Random Forest"
+        self.name = "Random Forest"
 
-    def train(self, X, y):  # S&P 500 feature
+    def train(self, X, y):
         stock_names = y.columns
         for stock in stock_names:
             X_train = X.values.reshape(-1, 1)
@@ -25,13 +25,11 @@ class Strategy:
         for stock, model in self.models.items():
             X = feature_df.values.reshape(-1, 1)
 
-            # Make predictions using the model
             y_pred = model.predict(X)
             predicted_returns[stock] = y_pred
 
         predicted_returns = pd.DataFrame(predicted_returns)
 
-        # Calculate total predicted returns for normalization
         total_predicted_returns = predicted_returns.sum(axis=1)
 
         # Calculate weights proportional to predicted returns
