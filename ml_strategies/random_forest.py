@@ -1,3 +1,4 @@
+import skops.io as sio
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -18,8 +19,13 @@ class Strategy:
             model.fit(X_train, y_train)
 
             self.models[stock] = model
+        
+
+        sio.dump(self.models, 'random-forest-strategy.sio')
+        
 
     def execute(self, feature_df, min_weight=0.2):
+        self.models = sio.load('random-forest-strategy.sio')
         predicted_returns = {}
 
         for stock, model in self.models.items():
