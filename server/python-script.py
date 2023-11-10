@@ -77,4 +77,4 @@ if args.train:
     strategy.train(feature_dataset, prediction_target_dataset)
 elif args.execute:
     weights = strategy.execute(feature_dataset)
-    print(weights)
+    print(weights.to_csv())
