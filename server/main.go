@@ -8,9 +8,14 @@ import (
 
 func main() {
 	script_path := os.Args[1]
-	feature_path := os.Args[2]
+	dataset_path := os.Args[2]
 
-	cmd := exec.Command("python3", script_path, "-X"+feature_path, "-e")
+	cmd := exec.Command(
+		"python3.11",
+		script_path,
+		"-d "+dataset_path,
+	)
+
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println("Python Error:")
