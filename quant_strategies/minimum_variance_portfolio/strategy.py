@@ -31,10 +31,7 @@ def execute(returns, min_weight=0.05):
         optimal_weights = pd.DataFrame(
             optimal_weights, index=returns.columns
         ).transpose()
-        optimal_weights = optimal_weights.loc[
-            optimal_weights.index.repeat(returns.shape[0] - 1)
-        ].reset_index(drop=True)
-        optimal_weights = optimal_weights.set_index(returns.index[1:])
+        optimal_weights = optimal_weights.set_index(returns.index[-1:])
 
         return optimal_weights
     else:

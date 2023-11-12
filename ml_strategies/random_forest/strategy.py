@@ -55,6 +55,6 @@ def execute(feature_df, min_weight=0.2):
 
     # Normalize weights to ensure they sum up to 1
     weights = weights.divide(weights.sum(axis=1), axis=0)
-    weights = weights.set_index(feature_df.index).iloc[1:]
+    weights = weights.set_index(feature_df.index)
 
     return weights

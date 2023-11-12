@@ -32,7 +32,7 @@ Here an example of a strategy's structure:
 - `__main__.py`
 - strategy (either a file or a module)
 
-Most importantly a strategy is expected to accept a dataset in CSV format with the flag `-d` or `--dataset` and to print a set of weights in CSV format.
+Most importantly a strategy is expected to accept a path to a dataset in CSV format with the flag `-d` or `--dataset` and to print a set of weights in CSV format.
 
 The package needs to include a Pipfile.lock, so that we can recreate a deterministic build for our testruns.
 
