@@ -41,3 +41,4 @@ The package needs to include a Pipfile.lock, so that we can recreate a determini
 - Move the backtester to a server
 - Allow a user to upload an investment strategy as a file
 - Annualize returns, sharpe ratio etc.
+- Implement rebalance frequencies for the backtester
