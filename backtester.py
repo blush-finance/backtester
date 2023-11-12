@@ -36,14 +36,14 @@ def analyze(
 
 
 class Report:
-    def __portfolio_values_breakdown(self, portfolio_weights, stock_returns):
+    def __portfolio_value_breakdown(self, portfolio_weights, stock_returns):
         current_portfolio_value = 100
-        portfolio_values_breakdown = pd.DataFrame()
+        portfolio_value_breakdown = pd.DataFrame()
         for date in stock_returns.index:
             # Rebalance
-            portfolio_values_breakdown = pd.concat(
+            portfolio_value_breakdown = pd.concat(
                 [
-                    portfolio_values_breakdown,
+                    portfolio_value_breakdown,
                     pd.DataFrame(
                         portfolio_weights.loc[[date]] * current_portfolio_value
                     ),
@@ -51,22 +51,22 @@ class Report:
             )
 
             # Calculate return
-            portfolio_values_breakdown.loc[date] = portfolio_values_breakdown.loc[
+            portfolio_value_breakdown.loc[date] = portfolio_value_breakdown.loc[
                 date
             ] * (1 + stock_returns.loc[date])
 
-            current_portfolio_value = portfolio_values_breakdown.loc[date].sum()
+            current_portfolio_value = portfolio_value_breakdown.loc[date].sum()
 
-        return portfolio_values_breakdown
+        return portfolio_value_breakdown
 
     def __init__(self, strategy_name, portfolio_weights, stock_returns):
         self.strategy_name = strategy_name
         self.portfolio_weights = portfolio_weights
-        self.portfolio_values_breakdown = self.__portfolio_values_breakdown(
+        self.portfolio_value_breakdown = self.portfolio_value_breakdown(
             portfolio_weights, stock_returns
         )
         self.portfolio_values = pd.DataFrame(
-            self.portfolio_values_breakdown.sum(axis=1), columns=["Value"]
+            self.portfolio_value_breakdown.sum(axis=1), columns=["Value"]
         )
         self.portfolio_returns = self.portfolio_values.pct_change().iloc[1:]
         self.portfolio_value = self.portfolio_values.iloc[-1][0]
@@ -92,7 +92,7 @@ class Report:
         )
 
     def plot_portfolio_value_breakdown(self):
-        self.portfolio_values_breakdown.plot(
+        self.portfolio_value_breakdown.plot(
             title=f"{self.strategy_name} portfolio value breakdown", figsize=(18, 8)
         )
 
