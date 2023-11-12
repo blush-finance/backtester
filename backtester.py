@@ -62,7 +62,7 @@ class Report:
     def __init__(self, strategy_name, portfolio_weights, stock_returns):
         self.strategy_name = strategy_name
         self.portfolio_weights = portfolio_weights
-        self.portfolio_value_breakdown = self.portfolio_value_breakdown(
+        self.portfolio_value_breakdown = self.__portfolio_value_breakdown(
             portfolio_weights, stock_returns
         )
         self.portfolio_values = pd.DataFrame(
