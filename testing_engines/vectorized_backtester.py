@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import subprocess
 import argparse
+import sys
 
 
 def run(
@@ -108,7 +109,17 @@ class Report:
 
 
 def install_dependency(package_path):
-    subprocess.call(["pip", "install", "-r", package_path + "/requirements.txt"])
+    subprocess.call(["pipenv", "install", package_path])
+    subprocess.call(
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            package_path + "/requirements.txt",
+        ]
+    )
 
 
 def main(
