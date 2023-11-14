@@ -26,15 +26,15 @@ Here an example of a strategy's structure:
 
 - `README.md`
 - `LICENSE`
-- `Pipfile`
-- `Pipfile.lock`
+- `requirements.txt`
+- `setup.py`
 - `__init__.py`
 - `__main__.py`
-- strategy (either a file or a module)
+- `<strategy name>` (either a file or a module)
+
+We will need a `requirements.txt` file to install the needed dependencies of the strategy.
 
 Most importantly a strategy is expected to accept a path to a dataset in CSV format with the flag `-d` or `--dataset` and to print a set of weights in CSV format.
-
-The package needs to include a Pipfile.lock, so that we can recreate a deterministic build for our testruns.
 
 ## Next steps
 
