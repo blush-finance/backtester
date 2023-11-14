@@ -73,12 +73,12 @@ class Report:
             self.portfolio_value_breakdown.sum(axis=1), columns=["Value"]
         )
         self.portfolio_returns = self.portfolio_values.pct_change().iloc[1:]
-        self.portfolio_value = self.portfolio_values.iloc[-1][0]
+        self.portfolio_value = self.portfolio_values.iloc[-1].iloc[0]
 
         self.portfolio_return = self.portfolio_value - 100
         self.portfolio_volatility = (
             self.portfolio_returns.std() * 100 * math.sqrt(250)
-        )[0]
+        ).iloc[0]
         self.sharpe_ratio = (self.portfolio_return - 5) / self.portfolio_volatility
 
     def plot_portfolio_returns(self):
