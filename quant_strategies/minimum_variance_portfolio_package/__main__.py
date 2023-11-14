@@ -1,7 +1,7 @@
 import sys
 import argparse
 import pandas as pd
-import strategy
+import minimum_variance_portfolio
 
 
 parser = argparse.ArgumentParser(
@@ -16,7 +16,7 @@ if not args.dataset:
     sys.exit(1)
 
 dataset_df = pd.read_csv(args.dataset.strip()).set_index("Date")
-weights = strategy.execute(dataset_df)
+weights = minimum_variance_portfolio.execute(dataset_df)
 
 print(weights.to_csv())
 sys.exit(0)
