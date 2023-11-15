@@ -110,7 +110,6 @@ class Report:
 
 def install_dependency(package_path):
     subprocess.call(["pipenv", "install", package_path])
-    print(package_path + "/requirements.txt")
     subprocess.call(
         [
             sys.executable,
