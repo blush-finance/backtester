@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import subprocess
 import argparse
 import sys
+import json
 
 
 def run(
@@ -107,6 +108,21 @@ class Report:
             index=["Portfolio return", "Portfolio volatility", "Sharpe ratio"],
         ).round(2)
 
+    def to_json(self):
+        return json.dumps(
+            {
+                "strategyName": self.strategy_name,
+                "portfolioReturn": self.portfolio_return,
+                "portfolioValue": self.portfolio_value,
+                "portfolioVolatility": self.portfolio_volatility,
+                "sharpeRatio": self.sharpe_ratio,
+                "portfolioValueBreakdown": self.portfolio_value_breakdown.to_dict(),
+                "portfolioValues": self.portfolio_values.to_dict(),
+                "portfolioReturns": self.portfolio_returns.to_dict(),
+                "portfolioWeights": self.portfolio_weights.to_dict(),
+            }
+        )
+
 
 def install_dependency(package_path):
     subprocess.call(["pipenv", "install", package_path])
@@ -141,13 +157,11 @@ def main(
 
     report = analyze(strategy.name, weights, market_data_df.loc[start_date:])
 
-    print("\n----------- RESULTS ----------")
-    print("\n----------- METRICS ----------")
-    print(report.portfolio_metrics())
-    print("\n----------- WEIGHTS ----------")
-    print(report.portfolio_weights)
-    print("\n----------- RETURNS ----------")
-    print(report.portfolio_returns)
+    print("\n----------- SAVE REPORT ----------")
+    report_path = "../external/report.json"
+    with open(report_path, "w") as file:
+        file.write(report.to_json())
+        print(f"Successfully created report here: {report_path}")
     print("\n----------- END --------------")
 
 
