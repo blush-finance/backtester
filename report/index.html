@@ -1,0 +1,20 @@
+---
+layout: base.njk
+---
+
+<h1 class="text-gray-700 text-2xl font-extrabold mt-3">
+  {{ report.strategyName }}
+</h1>
+<h2 class="text-gray-700 text-xl font-extrabold mt-3">Portfolio Metrics</h2>
+{% include 'portfolio-metrics-table.njk' %}
+
+<h2 class="text-gray-700 text-xl font-extrabold mt-3">Portfolio Returns</h2>
+<div id="portfolioReturnsGraph"></div>
+
+<h2 class="text-gray-700 text-xl font-extrabold mt-3 mb-1">Portfolio Value</h2>
+<div id="portfolioValuesGraph"></div>
+
+<h2 class="text-gray-700 text-xl font-extrabold mt-3 mb-1">
+  Portfolio Value Breakdown
+</h2>
+<div id="portfolioValueBreakdownGraph"></div>
