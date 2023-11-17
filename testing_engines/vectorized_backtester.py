@@ -116,10 +116,18 @@ class Report:
                 "portfolioValue": self.portfolio_value,
                 "portfolioVolatility": self.portfolio_volatility,
                 "sharpeRatio": self.sharpe_ratio,
-                "portfolioValueBreakdown": self.portfolio_value_breakdown.to_dict(),
-                "portfolioValues": self.portfolio_values.to_dict(),
-                "portfolioReturns": self.portfolio_returns.to_dict(),
-                "portfolioWeights": self.portfolio_weights.to_dict(),
+                "portfolioValueBreakdown": self.portfolio_value_breakdown.reset_index().to_dict(
+                    orient="records"
+                ),
+                "portfolioValues": self.portfolio_values.reset_index().to_dict(
+                    orient="records"
+                ),
+                "portfolioReturns": self.portfolio_returns.reset_index().to_dict(
+                    orient="records"
+                ),
+                "portfolioWeights": self.portfolio_weights.reset_index().to_dict(
+                    orient="records"
+                ),
             }
         )
 
@@ -158,7 +166,7 @@ def main(
     report = analyze(strategy.name, weights, market_data_df.loc[start_date:])
 
     print("\n----------- SAVE REPORT ----------")
-    report_path = "../external/report.json"
+    report_path = "../report/_data/report.json"
     with open(report_path, "w") as file:
         file.write(report.to_json())
         print(f"Successfully created report here: {report_path}")
